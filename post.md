@@ -1,4 +1,4 @@
-## What is a service?
+## What is a service
 
 - It provides us method to keep data across the lifetime of the angular app 
 - It provides us method to communicate data across the controllers in a consistent way
@@ -19,6 +19,8 @@ var CalculatorService = angular.module('CalculatorService', [])
     
 });
 ```
+### Different ways of creating service
+
 An AngularJS service can be created or registered or created in four different ways, 
 
 - Using the service() method
@@ -56,6 +58,7 @@ On the view we are using the controller to do the data binding as shown below,
     </div>
 
 ```
+### Creating service using the factory
 
 We can create a service using the factory as shown below. We are creating the service to reverse the string. 
 
@@ -106,12 +109,18 @@ On the view we are using the controller to do the data binding as shown below,
 
 ```
 
+### Difference between factory and service method
+
 Let us understand difference between creating a service using the service() method and the factory() method. 
 
 - Using the service() method uses the function constructor and it returns the object or instance of the function to work with 
 - Using the factory() method uses the returned value of the function. It returns the value of the function returned after the execution 
 
 If we want to register a service using the function constructor, in that scenario we will use service()  method to register the service. If we use factory() method to register the service it returns the value after execution of the service function. It can return any value like primitive value, function or object. So service() method returns the function object whereas factory() method can return any kind of value. 
+
+## Performing database operation on SQL Server using the service
+
+
 
 In further post we will talk about other ways of creating service. Now let us work on a full working example of using service in an angular app. We are going to create an application which will perform the followings, 
 
@@ -121,7 +130,8 @@ In further post we will talk about other ways of creating service. Now let us wo
 
 This post will not cover how to create a JSON based WCF REST Service. With the assumption that REST based service is already in place to retrieve the students and add a student, we will write the angular application. 
 
-##The Service 
+
+### database operation in the Service 
 
 ~~~javascript
 
@@ -148,7 +158,7 @@ StudentService.factory('StudentDataOp', ['$http', function ($http) {
 We are creating the service using the factory(). There are two methods in the service. getStudents fetch all the students  using the $http.get whereas addStudent add a student using the $http.post. In the service we are using other inbuilt angular service $http to make the call to the service. To use the $http service, we have to pass this as dependency to the service factory() method. 
 Once service is created, let us create the controller which will use the service to perform the operations. 
 
-###The Controller 
+### Controller using the service
 
 ~~~javascript 
 var myApp = angular.module('myApp', ['StudentService']);
@@ -192,7 +202,7 @@ myApp.controller('StudentController', function ($scope, StudentDataOp) {
 In the controller we are adding getStudents and addStudents functions to scope. As it is clear from the name that these functions are used to fetch students and add student respectively. As a dependency StudentSevice module is passed in the module and in the controller we are passing the StudentDataOp service as the dependency. 
 Other important thing to notice is that, we are creating student object to be added using the $scope object properties like fname and lname. These properties are set to the $scope on the view. 
 
-###The View
+### view to perform database operation
 
 View is very simple. StudentController is attached to the view. There are two section in the view. In first section we are taking user input to create the student. In the second section, in a table all the students are listed. 
 
